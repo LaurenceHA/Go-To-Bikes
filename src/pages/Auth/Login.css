@@ -1,0 +1,100 @@
+
+
+.login-form label{
+    display: block;
+    width:100%;
+    margin-bottom:10px;
+}
+
+.login-form input{
+    display:block;
+    width:100%;
+    margin-bottom:10px;
+    padding:5px;
+    border:1px solid #888;
+
+}
+.login-form button{
+    display: block;
+    padding:10px;
+    width: 100%;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-top:10px;
+}
+
+.login-form .login-back{
+    position: absolute;
+    top: 10px;
+    left: 0px;
+}
+
+.login-form ion-img{
+    position: relative;
+    width: 60px;
+    margin-top: 40px;
+    margin-bottom: 15px;
+}
+
+.login-form h1{
+    color:#000;
+    font-size: 30px;
+    font-weight: bold;
+    margin-top:0px;
+    margin-bottom: 0px;
+    width:100%;
+}
+.login-form h3{
+    color:#87929e;
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+.login-form .login-button{
+    width: 100%;
+}
+.login-form ion-label{
+    --color:#87929e;
+    font-size:15px;
+}
+.login-form ion-list{
+    width:100%;
+}
+.login-form ion-item ion-input input{
+    margin:0px;
+}
+.login-form ion-item {
+    margin-bottom:10px;
+}
+.login-form .sign-up{
+    width: 100%;
+    text-align: center;
+    margin-top: 16px;
+}
+.login-form .div-link{
+    color:#00a1ba;
+    display: inline-block;
+}
+
+
+.login-form-back-button{
+    margin: 0px;
+    padding:0px;
+
+}
+.login-form-back-button ion-button::part(native){
+    padding:0px !important;
+    z-index: 999;
+    margin-top: var(--ion-safe-area-top);
+    margin-left:-2px;
+}
+
+.login-form-wrapper{
+    margin-top: var(--ion-safe-area-top);
+    padding-top:20px;
+}
+
+.login-spin-form{
+    --background:#d93b89 ;
+}

@@ -1,0 +1,163 @@
+.form-error {
+  background: #d93b89;
+  color: #FFF;
+  padding: 10px;
+  margin-bottom: 5px;
+  border-radius: 10px;
+  width: 100%;
+}
+
+.form-success {
+  background: #95c11f;
+  color: #FFF;
+  padding: 10px;
+  margin-bottom: 5px;
+  border-radius: 10px;
+  width: 100%;
+}
+
+section.full-width {
+  padding: 10px;
+  width: 100%;
+}
+
+section.full-width ion-button {
+  margin-bottom: 10px;
+
+}
+
+.spinner-wrapper {
+  width: 100%;
+  text-align: center;
+}
+
+.spinner-wrapper ion-spinner {
+  margin-top: 50%;
+}
+
+.spinner-wrapper-requests ion-spinner {
+  margin-top: 35px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-help {
+  padding: 30px;
+  color: #777;
+}
+
+.text-muted {
+  color: #777;
+}
+
+.text-help div {
+  display: inline;
+}
+
+.request-title {
+  margin-left: 15px;
+}
+
+.selected-request-button {
+  border: 2px solid #95ba4e !important;
+}
+
+.requests-col-buttons {
+  background-color: #E6E6E6;
+}
+
+.requests-buttons-row ion-col ion-item {
+  border: 2px solid #FFF;
+  margin: 2px;
+}
+
+.date-time-picker {
+  padding: 10px 0px;
+  margin: 0px;
+}
+
+.date-time-picker::part(native){
+  padding:0px;
+  background: #FFF;
+  width:100%;
+}
+
+.button-spinner {
+  position: absolute;
+}
+
+.button-spinner-longer {
+  position: absolute;
+}
+
+.product-list-item::part(native) {
+  --margin: 0px;
+}
+
+.product-list-grid ion-col {
+  --ion-grid-column-padding-left: 0px;
+  --ion-grid-column-padding-right: 0px;
+}
+
+.rating-list-grid ion-col {
+  --ion-grid-column-padding-left: 0px;
+  --ion-grid-column-padding-right: 0px;
+  text-align: center;
+}
+
+.rating-list-grid {
+  width: 100%;
+  padding-top: 10px;
+}
+
+.float-right {
+  float: right;
+}
+
+.title-badge {
+  padding: 10px;
+}
+
+.floating-button {
+  --padding-top: 25px;
+  --padding-end: 20px;
+  --padding-bottom: 25px;
+  --padding-start: 20px;
+  --border-radius: 0px;
+  margin: 0px 0px 5px 0px;
+  font-size: 16px;
+  text-transform: initial;
+}
+
+.ws-pl {
+  white-space: pre-line;
+}
+
+.ws-normal {
+  white-space: normal !important;
+}
+
+.fixedLabel {
+  white-space: normal !important;
+  -webkit-transform:none !important;
+  transform: none !important;
+  -webkit-transition: none !important;
+  transition: none !important;
+  padding: 10px 0px;
+}
+
+
+.three-lines {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  /* number of lines to show */
+  line-height: 1.5em;
+  /* fallback */
+  max-height: 4.5em;
+  /* fallback */
+}
