@@ -244,12 +244,13 @@ const Bookings: React.FC = () => {
                                 <IonItem onClick={e => bookingClick(booking)} key={booking.id}>
                                     <IonLabel>
                                         <h2>{moment(booking.date).format("DD/MM/YYYY")}</h2>
+                                        {(booking.location_name) &&
+                                            < p >{booking.location_name}</p>
+                                        }
                                         {(authValues.user.type !== "shop" && booking.shop_name && booking.type === "delivery") &&
                                             < p >{booking.shop_name}</p>
                                         }
-                                        {(booking.route_name && booking.type === "ride") &&
-                                            < p >{booking.route_name}</p>
-                                        }
+                                        
                                         {(authValues.user.type !== "volunteer" && booking.volunteer_first_name) &&
                                             < p >{booking.volunteer_first_name} {booking.volunteer_last_name}</p>
                                         }

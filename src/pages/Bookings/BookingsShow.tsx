@@ -22,7 +22,7 @@ const BookingsShow: React.FC<BookingProps> = ({ match }) => {
     const { api_url, api_key, authValues } = useContext(AuthContext);
     const [items, setItems] = useState<any>([]);
     const [booking, setBooking] = useState<any>([]);
-    const [route, setRoute] = useState<any>([]);
+    const [location, setLocation] = useState<any>([]);
     const [cancelWarning, setCancelWarning] = useState(false);
     const [acceptWarning, setAcceptWarning] = useState(false);
     const [declineWarning, setDeclineWarning] = useState(false);
@@ -38,7 +38,7 @@ const BookingsShow: React.FC<BookingProps> = ({ match }) => {
             .then((res: any) => {
                 setBooking(res.data.booking);
                 setItems(res.data.items);
-                setRoute(res.data.route)
+                setLocation(res.data.location)
                 setSpinner(false);
             }).catch((error: any) => {
                 setSpinner(false);
@@ -353,6 +353,15 @@ const BookingsShow: React.FC<BookingProps> = ({ match }) => {
 
                                 </IonCol>
                             </IonRow>
+                            {location && location.name &&
+                                <IonRow>
+
+                                    <IonCol size="12">
+                                        <IonBadge color="secondary" className="title-badge">{location.name}</IonBadge>
+                                    </IonCol>
+
+                                </IonRow>
+                            }
                             {booking.type == "delivery" &&
                                 <IonRow>
 
@@ -366,15 +375,7 @@ const BookingsShow: React.FC<BookingProps> = ({ match }) => {
 
                                 </IonRow>
                             }
-                            {booking.type == "ride" &&
-                                <IonRow>
-
-                                    <IonCol size="12">
-                                        <IonBadge color="success" className="title-badge">{route.name}</IonBadge>
-                                    </IonCol>
-
-                                </IonRow>
-                            }
+                            
                             {authValues.user.type === "shop" &&
                                 <IonRow>
                                     <IonCol size="12">
@@ -395,11 +396,11 @@ const BookingsShow: React.FC<BookingProps> = ({ match }) => {
                                     }
                                 </IonCol>
                             </IonRow>
-                            {booking.type == "ride" &&
+                            {(booking.type == "ride" && location.description) &&
                                 <IonRow>
 
                                     <IonCol size="12" className='ws-pl'>
-                                        <b className='text-muted'>Route Description:</b><br></br>{route.description}
+                                        <b className='text-muted'>Location Description:</b><br></br>{location.description}
                                     </IonCol>
 
                                 </IonRow>
@@ -409,6 +410,24 @@ const BookingsShow: React.FC<BookingProps> = ({ match }) => {
 
                                     <IonCol size="12">
                                         <p className="text-muted ws-pl" >{booking.customer_notes}</p>
+                                    </IonCol>
+
+                                </IonRow>
+                            }
+                            {((booking.type == "ride" || authValues.user.type === "shop" || authValues.user.type === "volunteer" ) && booking.pickup) &&
+                                <IonRow>
+
+                                    <IonCol size="12">
+                                        <p className="text-muted ws-pl" ><b>Pick up Address</b><br></br>{booking.pickup}</p>
+                                    </IonCol>
+
+                                </IonRow>
+                            }
+                            {(( authValues.user.type === "customer" || authValues.user.type === "volunteer" ) && booking.dropoff) &&
+                                <IonRow>
+
+                                    <IonCol size="12">
+                                        <p className="text-muted ws-pl" ><b>Drop-off Address</b><br></br>{booking.dropoff}</p>
                                     </IonCol>
 
                                 </IonRow>

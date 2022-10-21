@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from "react-router";
 import {
-    IonContent, IonPage, IonGrid, IonRow, IonButtons,
+    IonContent, IonPage, IonGrid, IonRow,
     IonButton, IonList, IonItem, IonLabel, IonInput, IonSpinner
 } from '@ionic/react';
 import './Login.css';
@@ -9,7 +9,6 @@ import AuthContext from "../../contexts/Context";
 import { Network } from '@capacitor/network';
 import { SplashScreen } from '@capacitor/splash-screen';
 import { Preferences } from '@capacitor/preferences';
-import { AppBackButton } from '../../components/AppBackButton';
 
 const Login: React.FC = () => {
 

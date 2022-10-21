@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import { IonApp, IonIcon, IonLabel, IonRouterOutlet, IonTabBar, IonTabButton, IonTabs, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { Capacitor } from '@capacitor/core';
 import AuthContext from "./contexts/Context";
 
 
@@ -44,9 +43,13 @@ import AvailabilityCreate from './pages/VolunteersAvailabilities/AvailabilityCre
 import AvailabilityShow from './pages/VolunteersAvailabilities/AvailabilityShow';
 import BookingsReview from './pages/Bookings/BookingsReview';
 
-setupIonicReact();
+setupIonicReact({
+  animated: true,
+  hardwareBackButton: true
+});
 
 const App: React.FC = () => {
+  
 
   const { authValues } = useContext(AuthContext);
 

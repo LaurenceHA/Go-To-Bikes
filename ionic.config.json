@@ -1,7 +1,22 @@
 {
   "name": "Go To Bikes",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {
+      "plugins": {
+        "SplashScreen": {
+          "launchShowDuration": 2000,
+          "launchAutoHide": true,
+          "backgroundColor": "#ffffffff",
+          "androidSplashResourceName": "splash",
+          "androidScaleType": "CENTER_CROP",
+          "showSpinner": false,
+          "splashFullScreen": false,
+          "splashImmersive": false,
+          "layoutName": "launch_screen",
+          "useDialog": true
+        }
+      }
+    }
   },
   "type": "react"
 }
