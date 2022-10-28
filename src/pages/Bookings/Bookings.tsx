@@ -71,20 +71,18 @@ const Bookings: React.FC = () => {
                 setSpinner(true);
                 fetchData(filters.current.sTitle);
 
-                /*
                 setTimeout(function () {
                     
                     if ((isPlatform('ios') || isPlatform('android')) && window['plugins']) {
 
                         if (OneSignal) {
-                            OneSignal.setAppId("88adaf4d-0fbd-443f-a177-a27ef1f1f91f");
+                            OneSignal.setAppId("477d3ddd-ae3f-4ecd-b5c7-858fcdef2f55");
 
                             OneSignal.setNotificationOpenedHandler(notificationOpenedCallback);
 
                             OneSignal.promptForPushNotificationsWithUserResponse(function (state: any) {
 
                             });
-
                             OneSignal.addSubscriptionObserver(function (state: any) {
                                 //console.log("onesignaltest4");
                                 //console.log(JSON.stringify(state));
@@ -96,10 +94,11 @@ const Bookings: React.FC = () => {
                                             value: state.to.userId
                                         });
                                         const user = {
-                                            user_id: authValues.user.id,
+                                            resource_id: authValues.user.id,
+                                            resource_type: authValues.user.type,
                                             device: state.to.userId,
                                         };
-                                        axios.post(api_url + 'user/' + authValues.user.id + '/device' + api_key + '&customer=' + authValues.user.customer, user)
+                                        axios.post(api_url + 'devices' + api_key , user)
                                             .then((res: any) => {
                                                 //console.log("onesignaltestsuccess")
                                             }).catch((error: any) => {
@@ -113,8 +112,6 @@ const Bookings: React.FC = () => {
                     }
 
                 }, 100);
-                */
-
             }
         });
 
@@ -150,9 +147,16 @@ const Bookings: React.FC = () => {
                         </IonButton>
                     </IonButtons>
                     <IonTitle>Bookings</IonTitle>
-                    {(authValues.user.type === "customer" || authValues.user.type === "shop") &&
+                    {(authValues.user.type === "customer") &&
                         <IonButtons slot="end">
                             <IonButton routerLink={'/bookings/create'}>
+                                <IonIcon icon={addOutline} />
+                            </IonButton>
+                        </IonButtons>
+                    }
+                    {(authValues.user.type === "shop") &&
+                        <IonButtons slot="end">
+                            <IonButton routerLink={'/bookings/create/delivery'}>
                                 <IonIcon icon={addOutline} />
                             </IonButton>
                         </IonButtons>

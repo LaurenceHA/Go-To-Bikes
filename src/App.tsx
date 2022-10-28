@@ -42,6 +42,9 @@ import Availability from './pages/VolunteersAvailabilities/Availability';
 import AvailabilityCreate from './pages/VolunteersAvailabilities/AvailabilityCreate';
 import AvailabilityShow from './pages/VolunteersAvailabilities/AvailabilityShow';
 import BookingsReview from './pages/Bookings/BookingsReview';
+import BookingsCreate2 from './pages/Bookings/BookingCreate2';
+import BookingsCreate3 from './pages/Bookings/BookingCreate3';
+import BookingsCreate4 from './pages/Bookings/BookingCreate4';
 
 setupIonicReact({
   animated: true,
@@ -71,6 +74,9 @@ const App: React.FC = () => {
               <Route path="/bookings/:booking" component={BookingsShow} exact={true} />
               <Route path="/bookings/:booking/review" component={BookingsReview} exact={true} />
               <Route path="/bookings/create" component={BookingsCreate} exact={true} />
+              <Route path="/bookings/create/:type" component={BookingsCreate2} exact={true} />
+              <Route path="/bookings/create/:type/date" component={BookingsCreate3} exact={true} />
+              <Route path="/bookings/create/:type/form" component={BookingsCreate4} exact={true} />
               <Route path="/settings" component={Settings} exact={true} />
               <Route path="/settings/details" component={CustomerDetails} exact={true} />
               <Route path="/settings/password" component={ChangePassword} exact={true} />
@@ -110,6 +116,9 @@ const App: React.FC = () => {
                   <Route path="/:tab(bookings)" component={Bookings} exact={true} />
                   <Route path="/bookings/:booking" component={BookingsShow} exact={true} />
                   <Route path="/:tab(bookings)/create" component={BookingsCreate} exact={true} />
+                  <Route path="/:tab(bookings)/create/:type" component={BookingsCreate2} exact={true} />
+                  <Route path="/:tab(bookings)/create/:type/date" component={BookingsCreate3} exact={true} />
+                  <Route path="/:tab(bookings)/create/:type/form" component={BookingsCreate4} exact={true} />
                   <Route path="/:tab(products)" component={Items} exact={true} />
                   <Route path="/:tab(products)/:product" component={ItemsShow} exact={true} />
                   <Route path="/:tab(products)/create" component={ItemsCreate} exact={true} />
