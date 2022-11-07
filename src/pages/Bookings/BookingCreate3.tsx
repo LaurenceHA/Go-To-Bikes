@@ -40,6 +40,7 @@ const BookingsCreate3: React.FC<BookingProps> = ({ match }) => {
     const [validTimeFrom, setValidTimeFrom] = useState<string>("10:30:00");
     const [validTimeTo, setValidTimeTo] = useState<string>("14:30:00");
     const [validDates, setValidDates] = useState<any>([]);
+    const [unavailableDates, setUnavailableDates] = useState<any>([]);
     const [timetableDates, setTimetableDates] = useState<any>([]);
     const [timetableTimes, setTimetableTimes] = useState<any>([]);
     const [itemTotal, setItemTotal] = useState<string>("0.00");
@@ -63,6 +64,7 @@ const BookingsCreate3: React.FC<BookingProps> = ({ match }) => {
         axios.get(api_url + 'locations/' + loc + '/dates' + api_key + '&resource_id=' + authValues.user.id + '&resource_type=' + authValues.user.type + '&type=' + match.params.type)
             .then((res: any) => {
                 setValidDates(res.data);
+                setUnavailableDates(res.data.unavailable_dates);
                 setSpinner(false);
             }).catch((error: any) => {
                 setSpinner(false);
@@ -118,6 +120,16 @@ const BookingsCreate3: React.FC<BookingProps> = ({ match }) => {
         const utcDay = date.getUTCDay();
         const fDate = date.toISOString().split('T')[0];
         var allowed = 0;
+
+        if (unavailableDates && unavailableDates.length > 0) {
+            for (let uKey in unavailableDates) {
+                var udate = unavailableDates[uKey];
+                if (fDate === udate.date) {
+                    return false;
+                }
+            }
+        }
+
         if (validDates && validDates.week_days) {
             var weekdays = validDates.week_days;
             var dates = validDates.dates;
@@ -159,15 +171,15 @@ const BookingsCreate3: React.FC<BookingProps> = ({ match }) => {
 
         Preferences.set({
             key: 'date',
-            value: sdate+""
+            value: sdate + ""
         }).then(function () {
             Preferences.set({
                 key: 'time_from',
-                value: timeFrom+""
+                value: timeFrom + ""
             }).then(function () {
                 Preferences.set({
                     key: 'time_to',
-                    value: timeTo+""
+                    value: timeTo + ""
                 }).then(function () {
                     history.push({
                         pathname: '/bookings/create/' + match.params.type + '/form'
@@ -202,14 +214,19 @@ const BookingsCreate3: React.FC<BookingProps> = ({ match }) => {
                 :
                 <IonContent >
                     <IonModal keepContentsMounted={true}>
-                        <IonDatetime id="date" mode='ios' presentation='date' onIonChange={e => setDate(e.detail.value as string)} isDateEnabled={enabledDates} min={moment().format()} showDefaultTimeLabel={false}></IonDatetime>
+                        <IonDatetime id="date" mode='ios' className="date-picker" presentation='date' color="primary" onIonChange={e => setDate(e.detail.value as string)} isDateEnabled={enabledDates} min={moment().format()} showDefaultTimeLabel={false}></IonDatetime>
                     </IonModal>
                     <IonList style={{ paddingLeft: "10px", paddingRight: "10px" }}>
-                        <p className='text-muted' style={{ marginLeft: "10px", marginBottom: "5px" }}>Select a date and a timeslot.</p>
+                        {match.params.type === "delivery" ?
+                            <p className='' style={{ marginLeft: "10px", marginBottom: "5px" }}>Select a date and delivery window.</p>
+                            :
+                            <p className='' style={{ marginLeft: "10px", marginBottom: "5px" }}>Select a date and a timeslot.</p>
+                        }
+
 
 
                         <div style={{ width: "100%", display: "inline-block", paddingLeft: "5px", paddingTop: "10px" }}>
-                            <span style={{ display: "inline-block", paddingLeft: "5px", paddingRight: "8px", paddingTop: "10px" }} className="float-left text-muted">Pick a date: </span>
+                            <span style={{ display: "inline-block", paddingLeft: "5px", paddingRight: "8px", paddingTop: "10px" }} className="float-left ">Pick a date: </span>
                             <IonDatetimeButton datetime="date" className='date-time-picker float-left' placeholder="Select a Date" style={{ paddingTop: "5px" }}></IonDatetimeButton>
                         </div>
 
@@ -220,7 +237,7 @@ const BookingsCreate3: React.FC<BookingProps> = ({ match }) => {
                             :
                             <div style={{ width: "100%", display: "inline-block" }}>
                                 {!timetableDates || timetableDates.length === 0 &&
-                                    <p className='text-muted text-center' style={{ marginLeft: "10px" }}>No timeslots to display.<br></br>Please select a date.</p>
+                                    <p className=' text-center' style={{ marginLeft: "10px" }}>No timeslots to display.<br></br>Please select a date.</p>
                                 }
                                 {(timetableDates) &&
                                     <IonGrid className="timetable-wrapper" style={{ width: "100%" }}>

@@ -36,7 +36,7 @@ export const AuthProvider = (props:any) => {
                         Preferences.set({
                             key: 'token',
                             value: res.data.app_token,
-                        }).then((e:any) => resolve(true));
+                        }).then((e:any) => resolve(res.data.user_type));
                         
                     }).catch((error:any) => {
                         //Storage.remove({ key: 'token' });
@@ -61,7 +61,7 @@ export const AuthProvider = (props:any) => {
                         Preferences.set({
                             key: 'token',
                             value: res.data.app_token,
-                        }).then((e:any) => resolve(true));
+                        }).then((e:any) => resolve(res.data.user_type));
                     }).catch((error:any) => {
                         if (error.response && error.response.status === 422) {
                             const error_return = Object.values(JSON.parse(error.response.request.response));
@@ -94,7 +94,7 @@ export const AuthProvider = (props:any) => {
                         Preferences.set({
                             key: 'token',
                             value: res.data.app_token,
-                        }).then((e:any) => resolve(true));
+                        }).then((e:any) => resolve(res.data.user_type));
                     }).catch((error:any) => {
                         setAuthValues({
                             authenticated: false,

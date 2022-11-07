@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from "react-router";
 import {
     IonContent, IonPage, IonGrid, IonRow,
-    IonButton, IonList, IonItem, IonLabel, IonInput, IonSpinner
+    IonButton, IonList, IonItem, IonLabel, IonInput, IonSpinner, IonCol
 } from '@ionic/react';
 import './Login.css';
 import AuthContext from "../../contexts/Context";
@@ -15,7 +15,7 @@ const Login: React.FC = () => {
     const [email_address, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [errors, setErrors] = useState<[]>([]);
-    const { login } = React.useContext(AuthContext);
+    const { login, authValues } = React.useContext(AuthContext);
     const [spinner, setSpinner] = useState<boolean>(true);
     const [uploading, setUploading] = useState<boolean>(false);
     const history = useHistory();
@@ -35,12 +35,16 @@ const Login: React.FC = () => {
         });
     }
     const tokenLogin = async (e: any) => {
-        
+
         if (e.value) {
             await login({ user: "", password: "", token: e.value }).then(function (data: any) {
                 setSpinner(false);
-                if (data === true) {
-                    history.replace("/bookings")
+                if (data) {
+                    if (data === "customer") {
+                        history.replace("/home");
+                    } else {
+                        history.replace("/bookings");
+                    }
                     setTimeout(function () { //Start the timer
                         SplashScreen.hide();
                     }, 100);
@@ -66,8 +70,13 @@ const Login: React.FC = () => {
         setUploading(true);
         let result = await login({ user: email_address, password: password });
         setUploading(false);
-        if (result === true) {
-            history.replace("/bookings");
+        if (typeof result === 'string' || result instanceof String){
+            if (result === "customer") {
+                history.replace("/home");
+            } else {
+                history.replace("/bookings");
+            }
+
         } else {
             setErrors(result);
         }
@@ -84,6 +93,9 @@ const Login: React.FC = () => {
                 <IonContent className="ion-padding login-form">
 
                     <IonGrid className="login-form-wrapper">
+                        <IonRow className="login-logo-row " >
+                            <IonCol size="12"><div className="login-logo" ></div></IonCol>
+                        </IonRow>
                         <IonRow>
                             <IonList>
                                 <IonItem class="ion-no-padding" >

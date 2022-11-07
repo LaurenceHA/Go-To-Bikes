@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import {
     IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonList,
     IonItem, IonLabel, IonButtons, IonButton,
-    IonInput, useIonViewWillEnter, IonToast, IonIcon, IonAlert, IonSpinner, IonNote
+    IonInput, useIonViewWillEnter, IonToast, IonIcon, IonAlert, IonSpinner, IonNote, IonRow, IonCol
 } from '@ionic/react';
 import AuthContext from "../../contexts/Context";
 import axios from 'axios';
@@ -70,6 +70,11 @@ const Availability: React.FC = () => {
                     }]}
                 />
                 <IonList>
+                    {availability.length === 0 &&
+                        <IonRow>
+                            <IonCol size="12" className="text-center text-help" >No availability found.</IonCol>
+                        </IonRow>
+                    }
                     {Object.keys(availability).map((key) => (
                         <IonItem className='product-list-item' key={"item" + availability[key].id} onClick={e => availabilityClick(availability[key])}>
                             <IonLabel>

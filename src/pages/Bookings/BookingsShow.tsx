@@ -347,7 +347,7 @@ const BookingsShow: React.FC<BookingProps> = ({ match }) => {
                                     <h1>
                                         {moment(booking.date).format("dddd DD MMMM YYYY")}
                                         {booking.time_from &&
-                                            <span className="text-muted">
+                                            <span >
                                                 <br></br>{moment(booking.time_from, "HH:mm:ss").format("HH:mm")}
                                                 {booking.time_to &&
                                                     <span> - {moment(booking.time_to, "HH:mm:ss").format("HH:mm")}</span>
@@ -362,20 +362,7 @@ const BookingsShow: React.FC<BookingProps> = ({ match }) => {
                                 <IonRow>
 
                                     <IonCol size="12">
-                                        <IonBadge color="secondary" className="title-badge">{location.name}</IonBadge>
-                                    </IonCol>
-
-                                </IonRow>
-                            }
-                            {booking.type == "delivery" &&
-                                <IonRow>
-
-                                    <IonCol size="12">
-                                        {!booking.shop_confirmed_at ?
-                                            <IonBadge color="medium" className="title-badge">{booking.shop_name} - Pending</IonBadge>
-                                            :
-                                            <IonBadge color="success" className="title-badge">{booking.shop_name}</IonBadge>
-                                        }
+                                        <IonBadge color="secondary" className="title-badge">{location.name} {booking.type === "delivery" ? <span> - Delivery Service</span> : <span> - Bike Ride</span>}</IonBadge>
                                     </IonCol>
 
                                 </IonRow>
@@ -405,7 +392,7 @@ const BookingsShow: React.FC<BookingProps> = ({ match }) => {
                                 <IonRow>
 
                                     <IonCol size="12" className='ws-pl'>
-                                        <b className='text-muted'>Location Description:</b><br></br>{location.description}
+                                        <b>Location Description:</b><br></br>{location.description}
                                     </IonCol>
 
                                 </IonRow>
@@ -414,30 +401,23 @@ const BookingsShow: React.FC<BookingProps> = ({ match }) => {
                                 <IonRow>
 
                                     <IonCol size="12">
-                                        <p className="text-muted ws-pl" >{booking.customer_notes}</p>
+                                        <p className=" ws-pl" >{booking.customer_notes}</p>
                                     </IonCol>
 
                                 </IonRow>
                             }
-                            {((booking.type == "ride" || authValues.user.type === "shop" || authValues.user.type === "volunteer") && booking.pickup) &&
-                                <IonRow>
+                            <IonRow>
+                                <IonCol size="12">
+                                    <p className=" ws-pl" ><b>Pick up Location / Description</b><br></br>{booking.pickup}</p>
+                                </IonCol>
+                            </IonRow>
+                            <IonRow>
+                                <IonCol size="12">
+                                    <p className=" ws-pl" ><b>Drop-off Location</b><br></br>{booking.dropoff}</p>
+                                </IonCol>
+                            </IonRow>
 
-                                    <IonCol size="12">
-                                        <p className="text-muted ws-pl" ><b>Pick up Address</b><br></br>{booking.pickup}</p>
-                                    </IonCol>
-
-                                </IonRow>
-                            }
-                            {((authValues.user.type === "customer" || authValues.user.type === "volunteer") && booking.dropoff) &&
-                                <IonRow>
-
-                                    <IonCol size="12">
-                                        <p className="text-muted ws-pl" ><b>Drop-off Address</b><br></br>{booking.dropoff}</p>
-                                    </IonCol>
-
-                                </IonRow>
-                            }
-                            {(booking.type == "delivery" && items.length > 0) &&
+                            { /*(booking.type == "delivery" && items.length > 0) &&
                                 <IonRow>
                                     <IonCol size="12">
                                         <h3>Products</h3>
@@ -451,7 +431,7 @@ const BookingsShow: React.FC<BookingProps> = ({ match }) => {
                                                     </IonCol>
                                                 </IonRow>
                                                 {(items[key].total && booking.type === "delivery") &&
-                                                    <IonNote slot="end" color="medium">£{items[key].total}</IonNote>
+                                                    <IonNote slot="end" >£{items[key].total}</IonNote>
                                                 }
                                             </IonItem>
 
@@ -461,7 +441,7 @@ const BookingsShow: React.FC<BookingProps> = ({ match }) => {
                                         </IonItem>
                                     </IonCol>
                                 </IonRow>
-                            }
+                                            */}
                         </IonGrid>
                     }
                     <section className="full-width">

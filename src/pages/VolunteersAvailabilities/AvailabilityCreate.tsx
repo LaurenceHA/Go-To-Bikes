@@ -96,7 +96,7 @@ const AvailabilityCreate: React.FC = () => {
                     }]}
                 />
                 <IonModal keepContentsMounted={true}>
-                    <IonDatetime id="date" presentation='date' value={date} onIonChange={e => setDate(e.detail.value as string)}></IonDatetime>
+                    <IonDatetime id="date" mode='ios' className="date-picker" presentation='date' color="primary"  value={date} onIonChange={e => setDate(e.detail.value as string)}></IonDatetime>
                 </IonModal>
                 <IonModal keepContentsMounted={true}>
                     <IonDatetime id="recurringDate" presentation='date' value={recurringEndDate} onIonChange={e => setRecurringEndDate(e.detail.value as string)}></IonDatetime>

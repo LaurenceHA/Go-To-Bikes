@@ -2,7 +2,7 @@ import React, { useState, useContext, useRef } from 'react';
 import {
     IonContent, IonHeader, IonPage, IonTitle, IonToolbar,
     IonList, IonItem, IonLabel, IonRow, IonCol, IonSpinner, useIonViewWillEnter, isPlatform, IonNote,
-    IonGrid, IonButtons, IonButton, IonIcon
+    IonGrid, IonButtons, IonButton, IonIcon, IonBadge
 } from '@ionic/react';
 import AuthContext from "../../contexts/Context";
 import axios from 'axios';
@@ -49,7 +49,8 @@ const Bookings: React.FC = () => {
     const tokenLogin = async (e: any) => {
         if (e.value) {
             await tokenCheck({ token: e.value }).then(function (data: any) {
-                if (data !== true) {
+
+                if (!data) {
                     history.replace("/login")
                 }
             })
@@ -72,7 +73,7 @@ const Bookings: React.FC = () => {
                 fetchData(filters.current.sTitle);
 
                 setTimeout(function () {
-                    
+
                     if ((isPlatform('ios') || isPlatform('android')) && window['plugins']) {
 
                         if (OneSignal) {
@@ -98,7 +99,7 @@ const Bookings: React.FC = () => {
                                             resource_type: authValues.user.type,
                                             device: state.to.userId,
                                         };
-                                        axios.post(api_url + 'devices' + api_key , user)
+                                        axios.post(api_url + 'devices' + api_key, user)
                                             .then((res: any) => {
                                                 //console.log("onesignaltestsuccess")
                                             }).catch((error: any) => {
@@ -175,66 +176,72 @@ const Bookings: React.FC = () => {
 
                 :
                 <IonContent >
-                    <IonGrid className="requests-col-buttons">
-                        <IonRow class="requests-buttons-row">
-                            <IonCol size="6">
-                                {status === "1" ?
-                                    <IonItem className="selected-request-button" color="light" lines="none" onClick={e => statusSwitch("1", "Pending")}>
-                                        <IonLabel>Pending</IonLabel>
-                                    </IonItem>
-                                    :
-                                    <IonItem color="light" lines="none" onClick={e => statusSwitch("1", "Pending")}>
-                                        <IonLabel>Pending</IonLabel>
-                                    </IonItem>
-                                }
-                            </IonCol>
-                            <IonCol size="6">
-                                {status === "5" ?
-                                    <IonItem className="selected-request-button" color="light" lines="none" onClick={e => statusSwitch("5", "Upcoming")}>
-                                        <IonLabel>Upcoming</IonLabel>
-                                    </IonItem>
-                                    :
-                                    <IonItem color="light" lines="none" onClick={e => statusSwitch("5", "Upcoming")}>
-                                        <IonLabel>Upcoming</IonLabel>
-                                    </IonItem>
-                                }
-                            </IonCol>
-                            <IonCol size="6">
-                                {status === "4" ?
-                                    <IonItem className="selected-request-button" color="light" lines="none" onClick={e => statusSwitch("4", "Past")}>
-                                        <IonLabel>Past</IonLabel>
-                                    </IonItem>
-                                    :
-                                    <IonItem color="light" lines="none" onClick={e => statusSwitch("4", "Past")}>
-                                        <IonLabel>Past</IonLabel>
-                                    </IonItem>
-                                }
-                            </IonCol>
-                            <IonCol size="6">
-                                {status === "3" ?
-                                    <IonItem className="selected-request-button" color="light" lines="none" onClick={e => statusSwitch("3", "Declined")}>
-                                        <IonLabel>Declined</IonLabel>
-                                    </IonItem>
-                                    :
-                                    <IonItem color="light" lines="none" onClick={e => statusSwitch("3", "Declined")}>
-                                        <IonLabel>Declined</IonLabel>
-                                    </IonItem>
-                                }
-                            </IonCol>
-                            <IonCol size="6">
-                                {status === "2" ?
-                                    <IonItem className="selected-request-button" color="light" lines="none" onClick={e => statusSwitch("2", "Cancelled")}>
-                                        <IonLabel>Cancelled</IonLabel>
-                                    </IonItem>
-                                    :
-                                    <IonItem color="light" lines="none" onClick={e => statusSwitch("2", "Cancelled")}>
-                                        <IonLabel>Cancelled</IonLabel>
-                                    </IonItem>
-                                }
-                            </IonCol>
-                        </IonRow>
-                    </IonGrid>
-                    <h1 className="request-title">{title}</h1>
+                    {(authValues.user.type !== "customer") &&
+                        <IonGrid className="requests-col-buttons">
+
+                            <IonRow class="requests-buttons-row">
+                                <IonCol size="6">
+                                    {status === "1" ?
+                                        <IonItem className="selected-request-button" color="light" lines="none" onClick={e => statusSwitch("1", "Pending")}>
+                                            <IonLabel>Pending</IonLabel>
+                                        </IonItem>
+                                        :
+                                        <IonItem color="light" lines="none" onClick={e => statusSwitch("1", "Pending")}>
+                                            <IonLabel>Pending</IonLabel>
+                                        </IonItem>
+                                    }
+                                </IonCol>
+                                <IonCol size="6">
+                                    {status === "5" ?
+                                        <IonItem className="selected-request-button" color="light" lines="none" onClick={e => statusSwitch("5", "Upcoming")}>
+                                            <IonLabel>Upcoming</IonLabel>
+                                        </IonItem>
+                                        :
+                                        <IonItem color="light" lines="none" onClick={e => statusSwitch("5", "Upcoming")}>
+                                            <IonLabel>Upcoming</IonLabel>
+                                        </IonItem>
+                                    }
+                                </IonCol>
+                                <IonCol size="6">
+                                    {status === "4" ?
+                                        <IonItem className="selected-request-button" color="light" lines="none" onClick={e => statusSwitch("4", "Past")}>
+                                            <IonLabel>Past</IonLabel>
+                                        </IonItem>
+                                        :
+                                        <IonItem color="light" lines="none" onClick={e => statusSwitch("4", "Past")}>
+                                            <IonLabel>Past</IonLabel>
+                                        </IonItem>
+                                    }
+                                </IonCol>
+                                <IonCol size="6">
+                                    {status === "3" ?
+                                        <IonItem className="selected-request-button" color="light" lines="none" onClick={e => statusSwitch("3", "Declined")}>
+                                            <IonLabel>Declined</IonLabel>
+                                        </IonItem>
+                                        :
+                                        <IonItem color="light" lines="none" onClick={e => statusSwitch("3", "Declined")}>
+                                            <IonLabel>Declined</IonLabel>
+                                        </IonItem>
+                                    }
+                                </IonCol>
+                                <IonCol size="6">
+                                    {status === "2" ?
+                                        <IonItem className="selected-request-button" color="light" lines="none" onClick={e => statusSwitch("2", "Cancelled")}>
+                                            <IonLabel>Cancelled</IonLabel>
+                                        </IonItem>
+                                        :
+                                        <IonItem color="light" lines="none" onClick={e => statusSwitch("2", "Cancelled")}>
+                                            <IonLabel>Cancelled</IonLabel>
+                                        </IonItem>
+                                    }
+                                </IonCol>
+                            </IonRow>
+                        </IonGrid>
+                    }
+                    {(authValues.user.type !== "customer") &&
+                        <h1 className="request-title">{title}</h1>
+                    }
+
 
                     {bookings.length === 0 ?
                         <IonRow>
@@ -254,7 +261,7 @@ const Bookings: React.FC = () => {
                                         {(authValues.user.type !== "shop" && booking.shop_name && booking.type === "delivery") &&
                                             < p >{booking.shop_name}</p>
                                         }
-                                        
+
                                         {(authValues.user.type !== "volunteer" && booking.volunteer_first_name) &&
                                             < p >{booking.volunteer_first_name} {booking.volunteer_last_name}</p>
                                         }
@@ -262,9 +269,19 @@ const Bookings: React.FC = () => {
                                             < p >{booking.customer_first_name} {booking.customer_last_name}</p>
                                         }
                                     </IonLabel>
-                                    {(booking.total && booking.type === "delivery") &&
-                                        <IonNote slot="end" color="medium">£{booking.total}</IonNote>
+                                    {booking.status === "completed" &&
+                                        <IonBadge slot="end" color="success">Completed</IonBadge>
                                     }
+                                    {booking.status === "cancelled" &&
+                                        <IonBadge slot="end" color="warning">Cancelled</IonBadge>
+                                    }
+                                    {booking.status === "declined" &&
+                                        <IonBadge slot="end" color="warning">Declined</IonBadge>
+                                    }
+                                    {/*(booking.total && booking.type === "delivery") &&
+                                        <IonNote slot="end">£{booking.total}</IonNote>
+                                */}
+
 
                                 </IonItem>
 

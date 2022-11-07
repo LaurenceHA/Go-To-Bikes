@@ -186,3 +186,34 @@ section.full-width ion-button {
   color:#FFF;
   border:1px solid #d93b89;
 }
+
+.home-logo {
+  width: 237px;
+  height: 152px;
+  margin-top: 50px;
+  margin-left: 50%;
+  transform: translate(-50%);
+  background: #FFF url('../assets/img/logo.png') no-repeat;
+  background-size: 237px 152px;
+  box-sizing: border-box;
+}
+
+.home-text{
+  padding:20px 10px 10px 10px;
+}
+
+.login-logo {
+  width: 178px;
+  height: 114px;
+  margin-left: 50%;
+  margin-bottom: 20px;
+  transform: translate(-50%);
+  background: #FFF url('../assets/img/logo.png') no-repeat;
+  background-size: 178px 114px;
+  box-sizing: border-box;
+}
+
+.date-picker{
+  --background: #FFFFFF;
+  color:#000;
+}

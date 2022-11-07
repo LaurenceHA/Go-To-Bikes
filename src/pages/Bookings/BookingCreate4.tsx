@@ -30,6 +30,7 @@ const BookingsCreate4: React.FC<BookingProps> = ({ match }) => {
     const [timeFrom, setTimeFrom] = useState<string>("");
     const [timeTo, setTimeTo] = useState<string>("");
     const [notes, setNotes] = useState<string>("");
+    const [itemDescription, setItemDescription] = useState<string>("");
     const [pickup, setPickup] = useState<string>("");
     const [dropoff, setDropoff] = useState<string>("");
     const [type, setType] = useState<string>("delivery");
@@ -50,9 +51,9 @@ const BookingsCreate4: React.FC<BookingProps> = ({ match }) => {
 
     useEffect(() => {
         if (authValues.user.type === "customer") {
-            fetchCAddress(authValues.user.id);
+            //fetchCAddress(authValues.user.id);
         } else {
-            fetchCAddress(customer);
+            //fetchCAddress(customer);
         }
     }, [customer]);
 
@@ -157,11 +158,11 @@ const BookingsCreate4: React.FC<BookingProps> = ({ match }) => {
 
         fetchData();
         if (authValues.user.type === "customer") {
-            fetchCAddress(authValues.user.id);
+            //fetchCAddress(authValues.user.id);
         }
 
         if (authValues.user.type === "shop") {
-            fetchSAddress();
+            //fetchSAddress();
         }
 
     });
@@ -176,6 +177,7 @@ const BookingsCreate4: React.FC<BookingProps> = ({ match }) => {
             time_to: timeTo,
             type: match.params.type,
             notes: notes,
+            items: itemDescription,
             pickup: pickup,
             dropoff: dropoff,
             customer_id: customer,
@@ -323,33 +325,14 @@ const BookingsCreate4: React.FC<BookingProps> = ({ match }) => {
                         }
                         {location &&
                             <div>
-                                {(match.params.type === "delivery" && authValues.user.type === "customer") &&
-                                    <IonItem>
-                                        <IonLabel className="bold" position="stacked">Shop: </IonLabel>
-                                        <IonSelect interfaceOptions={{ cssClass: 'select-wide' }} onIonChange={e => shopSelected(e.detail.value)} value={shop}>
-                                            {Object.keys(shops).map((key) => (
-                                                <IonSelectOption key={"shop-" + key} value={shops[key].id}>{shops[key].name}</IonSelectOption>
-                                            ))}
-                                        </IonSelect>
-                                    </IonItem>
-                                }
-                                {(match.params.type === "delivery" && shop) &&
-                                    <IonItem detail={true} detailIcon={addOutline} onClick={e => setShopModal(true)}>
-                                        <IonLabel className="bold" >{itemCount} items<br></br>Total: £{itemTotal}</IonLabel>
-                                    </IonItem>
-                                }
-                                {((authValues.user.type == "customer" && match.params.type === "ride") || authValues.user.type == "shop") &&
-                                    <IonItem>
-                                        <IonLabel className="bold" position="stacked">Pickup Address: </IonLabel>
-                                        <IonTextarea rows={4} onIonChange={e => setPickup(e.detail.value as string)} autocapitalize="sentences" value={pickup}></IonTextarea>
-                                    </IonItem>
-                                }
-                                {authValues.user.type == "customer" && match.params.type === "delivery" &&
-                                    <IonItem>
-                                        <IonLabel className="bold" position="stacked">Dropoff Address: </IonLabel>
-                                        <IonTextarea rows={4} onIonChange={e => setDropoff(e.detail.value as string)} autocapitalize="sentences" value={dropoff}></IonTextarea>
-                                    </IonItem>
-                                }
+                                <IonItem>
+                                    <IonLabel className="bold" position="stacked">Pickup Location / Description: </IonLabel>
+                                    <IonTextarea rows={4} onIonChange={e => setPickup(e.detail.value as string)} autocapitalize="sentences" value={pickup}></IonTextarea>
+                                </IonItem>
+                                <IonItem>
+                                    <IonLabel className="bold" position="stacked">Dropoff Location: </IonLabel>
+                                    <IonTextarea rows={4} onIonChange={e => setDropoff(e.detail.value as string)} autocapitalize="sentences" value={dropoff}></IonTextarea>
+                                </IonItem>
                                 <IonItem>
                                     <IonLabel className="bold" position="stacked">Notes: </IonLabel>
                                     <IonTextarea rows={4} onIonChange={e => setNotes(e.detail.value as string)} autocapitalize="sentences" value={notes}></IonTextarea>

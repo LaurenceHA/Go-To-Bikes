@@ -78,7 +78,7 @@ const BookingsCreate2: React.FC<BookingProps> = ({ match }) => {
                 :
                 <IonContent >
                     <IonList style={{ paddingLeft: "10px", paddingRight: "10px" }}>
-                        <p className='text-muted' style={{ marginLeft: "10px" }}>Select a location</p>
+                        <p className='' style={{ marginLeft: "10px" }}>Select a location</p>
                         {Object.keys(locations).map((key) => (
                             <IonButton expand="block" color="primary" disabled={false} className="booking-create-button" key={"loc-" + locations[key].id} onClick={e => selectLocation(locations[key].id)}>{locations[key].name}</IonButton>
                         ))}

@@ -21,7 +21,7 @@ const BookingsCreate: React.FC = () => {
             </IonHeader>
             <IonContent >
                 <IonList style={{paddingLeft:"10px",paddingRight:"10px"}}>
-                    <p className='text-muted' style={{ marginLeft: "10px" }}>Select a service</p>
+                    <p  style={{ marginLeft: "10px" }}>Select a service</p>
                     <IonButton expand="block" color="primary" routerLink={'/bookings/create/delivery'} disabled={false} className="booking-create-button">Delivery Service</IonButton>
                     <IonButton expand="block" color="primary" routerLink={'/bookings/create/ride'} disabled={false} className="booking-create-button">Bike Ride</IonButton>
                 </IonList>
