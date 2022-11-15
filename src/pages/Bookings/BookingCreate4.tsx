@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import {
     IonContent, IonHeader, IonPage, IonTitle, IonToolbar,
     IonList, IonItem, IonLabel, IonRow, IonCol, IonSpinner, useIonViewWillEnter,
-    IonGrid, IonButtons, IonButton, IonIcon, IonDatetime, IonDatetimeButton, IonTextarea, IonSelect, IonSelectOption, IonModal
+    IonGrid, IonButtons, IonButton, IonIcon, IonDatetime, IonDatetimeButton, IonTextarea, IonSelect, IonSelectOption, IonModal, IonAlert
 } from '@ionic/react';
 import AuthContext from "../../contexts/Context";
 import axios from 'axios';
@@ -45,6 +45,7 @@ const BookingsCreate4: React.FC<BookingProps> = ({ match }) => {
     const [uploading, setUploading] = useState<boolean>(false);
     const [showToast, setShowToast] = useState<boolean>(false);
     const [shopModal, setShopModal] = useState<boolean>(false);
+    const [saveWarning, setSaveWarning] = useState<boolean>(false);
     const [errors, setErrors] = useState<[]>([]);
     const [rerender, setRerender] = useState(false);
     const { api_url, api_key, authValues, tokenCheck } = useContext(AuthContext);
@@ -189,10 +190,18 @@ const BookingsCreate4: React.FC<BookingProps> = ({ match }) => {
         };
         axios.post(api_url + 'bookings' + api_key, data)
             .then((res: any) => {
+                
                 setUploading(false);
-                history.push({
-                    pathname: '/bookings'
-                });
+                if(res.data.id){
+                    history.push({
+                        pathname: '/bookings/'+res.data.id+'/confirm'
+                    });
+                }else{
+                    history.push({
+                        pathname: '/bookings'
+                    });
+                }
+                
             }).catch((error: any) => {
                 setUploading(false);
                 if (error.response && error.response.status === 422 && error.response.request.response) {
@@ -273,6 +282,27 @@ const BookingsCreate4: React.FC<BookingProps> = ({ match }) => {
 
                 :
                 <IonContent >
+                    <IonAlert
+                        isOpen={saveWarning}
+                        onDidDismiss={() => setSaveWarning(false)}
+                        cssClass='save-alert-class'
+                        header={'Are you sure you wish to create this booking?'}
+                        message={'Date: '+moment(date).format("DD/MM/YYYY")+'<br> Time: '+timeFrom+' - '+timeTo}
+                        mode="ios"
+                        buttons={[
+                            {
+                                text: 'Cancel',
+                                role: 'cancel',
+                                cssClass: 'secondary'
+                            },
+                            {
+                                text: 'Yes',
+                                handler: () => {
+                                    storeBooking();
+                                }
+                            }
+                        ]}
+                    />
                     <IonModal isOpen={shopModal}>
                         <IonHeader>
                             <IonToolbar>

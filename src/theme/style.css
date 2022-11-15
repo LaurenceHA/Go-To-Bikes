@@ -217,3 +217,21 @@ section.full-width ion-button {
   --background: #FFFFFF;
   color:#000;
 }
+.save-alert-class .alert-message{
+  color:#000;
+}
+
+.sign-up .div-link b{
+  color:#d93b89;
+}
+
+.confirmation-banner{
+  background-color: #95ba4e;
+  padding:5px;
+  color:#FFF
+}
+.confirmation-banner span{
+  margin-top: 5px;
+  margin-bottom: 5px;
+  display: inline-block;
+}

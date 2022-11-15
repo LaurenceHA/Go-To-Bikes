@@ -70,7 +70,7 @@ const Login: React.FC = () => {
         setUploading(true);
         let result = await login({ user: email_address, password: password });
         setUploading(false);
-        if (typeof result === 'string' || result instanceof String){
+        if (typeof result === 'string' || result instanceof String) {
             if (result === "customer") {
                 history.replace("/home");
             } else {
@@ -120,11 +120,10 @@ const Login: React.FC = () => {
                                 <IonButton expand="block" color="primary" onClick={() => attemptLogin()} disabled={false} className="login-button">Log In</IonButton>
                             }
                         </IonRow>
-                        {/* 
-                    <IonRow>
-                        <div className="sign-up">Don't have an account? <div className="div-link" onClick={e => { window.open('https://liverylive.com/register', '_system', 'location=yes'); return false; }}><b>Join</b></div> </div>
-                    </IonRow>
-                    */}
+
+                        <IonRow>
+                            <div className="sign-up" >Don't have an account? <div className="div-link"  onClick={e => { window.open('https://goto.pmclient.co.uk/customer/signup', '_system', 'location=yes'); return false; }}><b >Sign up</b></div> </div>
+                        </IonRow>
                     </IonGrid>
 
 

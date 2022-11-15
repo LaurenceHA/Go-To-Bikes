@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, useRef } from 'react';
 import {
     IonContent, IonHeader, IonPage, IonTitle, IonToolbar,
     IonList, IonItem, IonLabel, IonRow, IonCol, IonSpinner, useIonViewWillEnter,
@@ -214,7 +214,7 @@ const BookingsCreate3: React.FC<BookingProps> = ({ match }) => {
                 :
                 <IonContent >
                     <IonModal keepContentsMounted={true}>
-                        <IonDatetime id="date" mode='ios' className="date-picker" presentation='date' color="primary" onIonChange={e => setDate(e.detail.value as string)} isDateEnabled={enabledDates} min={moment().format()} showDefaultTimeLabel={false}></IonDatetime>
+                        <IonDatetime id="date" mode='ios' className="date-picker" presentation='date' color="primary" onIonChange={e => {setDate(e.detail.value as string); e.target.confirm(true)}}  isDateEnabled={enabledDates} min={moment().format()} showDefaultTimeLabel={false}></IonDatetime>
                     </IonModal>
                     <IonList style={{ paddingLeft: "10px", paddingRight: "10px" }}>
                         {match.params.type === "delivery" ?
@@ -222,8 +222,6 @@ const BookingsCreate3: React.FC<BookingProps> = ({ match }) => {
                             :
                             <p className='' style={{ marginLeft: "10px", marginBottom: "5px" }}>Select a date and a timeslot.</p>
                         }
-
-
 
                         <div style={{ width: "100%", display: "inline-block", paddingLeft: "5px", paddingTop: "10px" }}>
                             <span style={{ display: "inline-block", paddingLeft: "5px", paddingRight: "8px", paddingTop: "10px" }} className="float-left ">Pick a date: </span>
@@ -250,7 +248,7 @@ const BookingsCreate3: React.FC<BookingProps> = ({ match }) => {
                                                 <IonRow>
                                                     <IonCol size='3' style={{ "padding": "5px" }}></IonCol>
                                                     {Object.keys(timetableDates).map((key) => (
-                                                        <IonCol size='3' style={{ "padding": "5px" }} key={"dates-" + key}>
+                                                        <IonCol size='9' style={{ "padding": "5px", textAlign:"center" }} key={"dates-" + key}>
                                                             <h5>
                                                                 {moment(timetableDates[key], "YYYY-MM-DD").format("ddd D MMM")}
                                                             </h5>
@@ -261,7 +259,7 @@ const BookingsCreate3: React.FC<BookingProps> = ({ match }) => {
                                                     <IonRow key={"time-" + tkey}>
                                                         <IonCol size='3'>{timetableTimes[tkey].from} -<br></br> {timetableTimes[tkey].to}</IonCol>
                                                         {Object.keys(timetableDates).map((key) => (
-                                                            <IonCol key={"datestimes-" + key} size='3' style={{ "padding": "5px" }} onClick={e => selectSlot(timetableDates[key], timetableTimes[tkey].from, timetableTimes[tkey].to)}>
+                                                            <IonCol key={"datestimes-" + key} size='9' style={{ "padding": "5px" }} onClick={e => selectSlot(timetableDates[key], timetableTimes[tkey].from, timetableTimes[tkey].to)}>
                                                                 {(timetableDates[key] === sdate && timetableTimes[tkey].from === timeFrom && timetableTimes[tkey].to === timeTo) ?
                                                                     <div className="timetable-slot active">
                                                                         Selected

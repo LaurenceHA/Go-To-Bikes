@@ -293,7 +293,7 @@ const BookingsShow: React.FC<BookingProps> = ({ match }) => {
 
                 <IonToolbar color="primary">
                     <IonButtons slot="start">
-                        <AppBackButton />
+                        <AppBackButton forceLink='/bookings'/>
                     </IonButtons>
                     <IonTitle>View Booking</IonTitle>
                 </IonToolbar>
@@ -344,7 +344,7 @@ const BookingsShow: React.FC<BookingProps> = ({ match }) => {
                         <IonGrid className="diary-view-grid">
                             <IonRow>
                                 <IonCol size="12">
-                                    <h1>
+                                    <h1 style={{marginTop:"5px"}}>
                                         {moment(booking.date).format("dddd DD MMMM YYYY")}
                                         {booking.time_from &&
                                             <span >

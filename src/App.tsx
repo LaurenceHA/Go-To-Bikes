@@ -46,6 +46,7 @@ import BookingsCreate2 from './pages/Bookings/BookingCreate2';
 import BookingsCreate3 from './pages/Bookings/BookingCreate3';
 import BookingsCreate4 from './pages/Bookings/BookingCreate4';
 import Home from './pages/Home/Home';
+import BookingsConfirm from './pages/Bookings/BookingsConfirm';
 
 setupIonicReact({
   animated: true,
@@ -75,6 +76,7 @@ const App: React.FC = () => {
                 <Route path="/:tab(home)" component={Home} exact={true} />
                 <Route path="/:tab(bookings)" component={Bookings} exact={true} />
                 <Route path="/:tab(bookings)/:booking" component={BookingsShow} exact={true} />
+                <Route path="/:tab(bookings)/:booking/confirm" component={BookingsConfirm} exact={true} />
                 <Route path="/:tab(bookings)/:booking/review" component={BookingsReview} exact={true} />
                 <Route path="/:tab(bookings)/create" component={BookingsCreate} exact={true} />
                 <Route path="/:tab(bookings)/create/:type" component={BookingsCreate2} exact={true} />
@@ -134,6 +136,7 @@ const App: React.FC = () => {
                   <Route path="/:tab(bookings)/create/:type" component={BookingsCreate2} exact={true} />
                   <Route path="/:tab(bookings)/create/:type/date" component={BookingsCreate3} exact={true} />
                   <Route path="/:tab(bookings)/create/:type/form" component={BookingsCreate4} exact={true} />
+                  <Route path="/:tab(bookings)/:booking/confirm" component={BookingsConfirm} exact={true} />
                   <Route path="/:tab(products)" component={Items} exact={true} />
                   <Route path="/:tab(products)/:product" component={ItemsShow} exact={true} />
                   <Route path="/:tab(products)/create" component={ItemsCreate} exact={true} />
