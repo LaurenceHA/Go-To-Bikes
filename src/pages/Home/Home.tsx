@@ -46,9 +46,9 @@ const Home: React.FC = () => {
 
         var redirect = jsonData.notification.payload.additionalData.redirect;
         var id = jsonData.notification.payload.additionalData.id;
-
-        history.push(redirect);
-
+        if(redirect){
+            history.push(redirect);
+        }
     };
 
     useIonViewWillEnter(() => {
