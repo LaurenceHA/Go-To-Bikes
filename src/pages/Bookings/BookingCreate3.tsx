@@ -100,6 +100,13 @@ const BookingsCreate3: React.FC<BookingProps> = ({ match }) => {
 
     useIonViewWillEnter(() => {
 
+        setTimetableDates([]);
+        setTimetableTimes([]);
+        setDate("");
+        setSDate("");
+        setTimeFrom("");
+        setTimeTo("");
+        setSpinner(true);
         getLocation();
 
     });

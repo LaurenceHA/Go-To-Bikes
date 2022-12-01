@@ -128,6 +128,11 @@ const BookingsCreate4: React.FC<BookingProps> = ({ match }) => {
 
     useIonViewWillEnter(() => {
 
+        setSpinner(true);
+        setPickup("");
+        setDropoff("");
+        setNotes("");
+
         Preferences.get({ key: 'location_id' }).then(e => {
             if (e.value) {
                 setLocation(e.value);
