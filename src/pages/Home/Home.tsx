@@ -44,6 +44,11 @@ const Home: React.FC = () => {
 
     var notificationOpenedCallback = function (jsonData: any) {
 
+        var redirect = jsonData.notification.payload.additionalData.redirect;
+        var id = jsonData.notification.payload.additionalData.id;
+
+        history.push(redirect);
+
     };
 
     useIonViewWillEnter(() => {
