@@ -122,7 +122,7 @@ const Login: React.FC = () => {
                         </IonRow>
 
                         <IonRow>
-                            <div className="sign-up" >Don't have an account? <div className="div-link"  onClick={e => { window.open('https://goto.pmclient.co.uk/customer/signup', '_system', 'location=yes'); return false; }}><b >Sign up</b></div> </div>
+                            <div className="sign-up" >Don't have an account? <div className="div-link"  onClick={e => { window.open('https://goto.pm-apps.co.uk/customer/signup', '_system', 'location=yes'); return false; }}><b >Sign up</b></div> </div>
                         </IonRow>
                     </IonGrid>
 

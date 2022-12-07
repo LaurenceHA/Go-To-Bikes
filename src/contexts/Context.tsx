@@ -6,7 +6,7 @@ export const AuthContext = createContext<any>(undefined);
 
 export const AuthProvider = (props:any) => {
 
-    const api_url = "https://goto.pmclient.co.uk/api/";
+    const api_url = "https://goto.pm-apps.co.uk/api/";
     const api_key = "?api_token=RtbAZ662euvdfMyVb3qrCJ9wLBcT7wHJifoeviqN";
 
     const [authValues, setAuthValues] = useState<any>({
